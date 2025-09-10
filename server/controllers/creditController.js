@@ -59,7 +59,7 @@ export const purchasePlan = async (req, res) => {
   try {
     const { planId } = req.body;
     const userId = req.user._id;
-    const plan = await plans.find((plan) => plan._id === planId);
+    const plan = plans.find((plan) => plan._id === planId);
 
     if (!plan) {
       return res.json({ success: false, message: "invalid plan" });
@@ -89,12 +89,13 @@ export const purchasePlan = async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${origin}/loading`,
+      success_url: `${origin}loading`,
       cancel_url: `${origin}`,
       metadata: {
         transactionId: transaction._id.toString(),
         appId: "chitchat",
       },
+
       expires_at: Math.floor(Date.now() / 1000) + 30 * 60, //expires in 30 min
     });
 
