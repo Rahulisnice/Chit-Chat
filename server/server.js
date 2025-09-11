@@ -11,6 +11,11 @@ import { stripeWebhooks } from "./controllers/webhooks.js";
 await connectDb();
 const app = express();
 
+app.use((req, res, next) => {
+  console.log("➡️ Incoming request:", req.method, req.url);
+  next();
+});
+
 //stripe webhooks
 app.post(
   "/api/stripe",
