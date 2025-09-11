@@ -90,10 +90,11 @@ export const stripeWebhooks = async (req, res) => {
   try {
     // Ensure we have the raw body for signature verification
     event = stripe.webhooks.constructEvent(
-      JSON.stringify(req.body),
+      req.body, // raw body buffer here
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
+
     console.log("✅ Event received:", event.type);
     console.log("✅ Event ID:", event.id);
   } catch (err) {
