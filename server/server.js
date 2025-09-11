@@ -58,14 +58,7 @@ app.use((req, res, next) => {
 });
 
 // IMPORTANT: Stripe webhook MUST be before express.json() middleware
-app.post(
-  "/api/stripe",
-  express.raw({
-    type: "application/json",
-    limit: "10mb", // Increase limit if needed
-  }),
-  stripeWebhooks
-);
+app.post("/api/stripe", stripeWebhooks);
 
 // Regular middleware (after webhook route)
 app.use(
