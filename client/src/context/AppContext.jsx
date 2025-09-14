@@ -49,7 +49,7 @@ export const AppContextProvider = ({ children }) => {
 
   const fetchUsersChats = async () => {
     try {
-      const { data } = axios.get("/api/chat/get", {
+      const { data } = await axios.get("/api/chat/get", {
         headers: { Authorization: token },
       });
 
@@ -59,9 +59,9 @@ export const AppContextProvider = ({ children }) => {
         // if the user has no chats, create one
         if (data.chats.length === 0) {
           await createNewChat();
-          fetchUsersChats();
+          return fetchUsersChats();
         } else {
-          setSelectedChats(data.chat[0]);
+          setSelectedChats(data.chats[0]);
         }
       } else {
         toast.error(data.message);

@@ -89,8 +89,8 @@ export const purchasePlan = async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${origin}loading`,
-      cancel_url: `${origin}`,
+      success_url: `${origin}/loading`,
+      cancel_url: `${origin}/`,
       metadata: {
         transactionId: transaction._id.toString(),
         appId: "chitchat",

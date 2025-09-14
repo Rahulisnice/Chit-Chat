@@ -16,7 +16,7 @@ const SideBar = ({ isMenuOpen, setIsMenuOpen }) => {
     axios,
     setChats,
     token,
-    fetchUserChats,
+    fetchUsersChats,
     setToken,
   } = useAppContext();
   const [search, setSearch] = useState("");
@@ -41,11 +41,11 @@ const SideBar = ({ isMenuOpen, setIsMenuOpen }) => {
       );
       if (data.success) {
         setChats((prev) => prev.filter((chat) => chat._id !== chatId));
-        await fetchUserChats();
+        await fetchUsersChats();
         toast.success(data.message);
       }
     } catch (error) {
-      toast.success(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -119,9 +119,9 @@ const SideBar = ({ isMenuOpen, setIsMenuOpen }) => {
               </div>
               <img
                 onClick={(e) =>
-                  toast.promise(
-                    deleteChat(e, chat._id, { loading: "deleting..." })
-                  )
+                  toast.promise(deleteChat(e, chat._id), {
+                    Loading: "deleting...",
+                  })
                 }
                 src={assets.bin_icon}
                 className="hidden group-hover:block w-4 cursor-pointer not-dark:invert"

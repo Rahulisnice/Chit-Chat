@@ -21,7 +21,7 @@ export const textMessageController = async (req, res) => {
 
     const chat = await Chat.findOne({ userId, _id: chatId });
     chat.messages.push({
-      role: "User",
+      role: "user",
       content: prompt,
       timestamp: Date.now(),
       isImage: false,
@@ -73,7 +73,7 @@ export const imageMessageController = async (req, res) => {
 
     //push user message
     chat.messages.push({
-      role: "User",
+      role: "user",
       content: prompt,
       timestamp: Date.now(),
       isImage: false,
