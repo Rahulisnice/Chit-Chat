@@ -17,7 +17,7 @@ const Login = () => {
       if (data.success) {
         setToken(data.token);
         localStorage.setItem("token", data.token);
-        toast.success("Logged out successfully");
+        toast.success("Logged in successfully");
       } else {
         toast.error(data.message);
       }
