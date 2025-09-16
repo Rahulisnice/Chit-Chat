@@ -56,6 +56,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 //api controller for purchasing a plan
 export const purchasePlan = async (req, res) => {
+  // disable the purhase feature
+  if (process.env.FEATURE_CREDIT_PURCHASE === "off") {
+    return res.json({
+      success: false,
+      message: "Purchase feature is blocked by host for demo.",
+    });
+  }
+
   try {
     const { planId } = req.body;
     const userId = req.user._id;

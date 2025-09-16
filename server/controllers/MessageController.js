@@ -56,6 +56,14 @@ export const textMessageController = async (req, res) => {
 
 //img generator message controller
 export const imageMessageController = async (req, res) => {
+  // Disable image generation if blocked by the host
+  if (process.env.DISABLE_IMAGE_FEATURE === "true") {
+    return res.json({
+      success: false,
+      message: "Image generation feature is blocked by host for demo",
+    });
+  }
+
   try {
     const userId = req.user._id;
 
